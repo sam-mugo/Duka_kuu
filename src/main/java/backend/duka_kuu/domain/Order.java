@@ -1,19 +1,11 @@
 package backend.duka_kuu.domain;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.util.UUID;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -40,17 +32,18 @@ public class Order {
             strategy = GenerationType.SEQUENCE,
             generator = "primary_sequence"
     )
-    private Long id;
+    private Long orderId;
 
     @Column(nullable = false, unique = true)
-    private String orderNumber;
+    private UUID orderNumber;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderLineItems> orderOrderLineItems;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId")
+    private List<OrderLineItems> orderItems;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
-    private AppUser customer;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "customer_id", nullable = false)
+//    private AppUser customer;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

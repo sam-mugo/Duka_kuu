@@ -5,16 +5,18 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Getter
 @Setter
 public class OrderDTO {
 
-    private Long id;
+    private Long orderId;
 
     @NotNull
     @Size(max = 255)
-    private String orderNumber;
+    private UUID orderNumber;
 
     @NotNull
     private Long customer;

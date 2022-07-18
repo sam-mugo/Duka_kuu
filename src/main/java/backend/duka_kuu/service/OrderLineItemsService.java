@@ -65,7 +65,7 @@ public class OrderLineItemsService {
         orderLineItemsDTO.setSkuCode(orderLineItems.getSkuCode());
         orderLineItemsDTO.setPrice(orderLineItems.getPrice());
         orderLineItemsDTO.setQuantity(orderLineItems.getQuantity());
-        orderLineItemsDTO.setOrder(orderLineItems.getOrder() == null ? null : orderLineItems.getOrder().getId());
+        orderLineItemsDTO.setOrder(orderLineItems.getOrder() == null ? null : orderLineItems.getOrder().getOrderId());
         //orderLineItemsDTO.setInventory(orderLineItems.getInventory() == null ? null : orderLineItems.getInventory().getId());
         return orderLineItemsDTO;
     }

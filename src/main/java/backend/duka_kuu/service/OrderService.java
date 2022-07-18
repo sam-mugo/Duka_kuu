@@ -6,6 +6,7 @@ import backend.duka_kuu.model.OrderDTO;
 import backend.duka_kuu.repos.AppUserRepo;
 import backend.duka_kuu.repos.OrderRepository;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -26,14 +27,14 @@ public class OrderService {
     }
 
     public List<OrderDTO> findAll() {
-        return orderRepository.findAll(Sort.by("id"))
+        return orderRepository.findAll(Sort.by("orderId"))
                 .stream()
                 .map(order -> mapToDTO(order, new OrderDTO()))
                 .collect(Collectors.toList());
     }
 
-    public OrderDTO get(final Long id) {
-        return orderRepository.findById(id)
+    public OrderDTO get(final Long orderId) {
+        return orderRepository.findById(orderId)
                 .map(order -> mapToDTO(order, new OrderDTO()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -41,7 +42,7 @@ public class OrderService {
     public Long create(final OrderDTO orderDTO) {
         final Order order = new Order();
         mapToEntity(orderDTO, order);
-        return orderRepository.save(order).getId();
+        return orderRepository.save(order).getOrderId();
     }
 
     public void update(final Long id, final OrderDTO orderDTO) {
@@ -51,22 +52,22 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public void delete(final Long id) {
-        orderRepository.deleteById(id);
+    public void delete(final Long orderId) {
+        orderRepository.deleteById(orderId);
     }
 
     private OrderDTO mapToDTO(final Order order, final OrderDTO orderDTO) {
-        orderDTO.setId(order.getId());
-        orderDTO.setOrderNumber(order.getOrderNumber());
-        orderDTO.setCustomer(order.getCustomer() == null ? null : order.getCustomer().getId());
+        orderDTO.setOrderId(order.getOrderId());
+        orderDTO.setOrderNumber(UUID.randomUUID());
+        //orderDTO.setCustomer(order.getCustomer() == null ? null : order.getCustomer().getId());
         return orderDTO;
     }
 
     private Order mapToEntity(final OrderDTO orderDTO, final Order order) {
-        order.setOrderNumber(orderDTO.getOrderNumber());
-        final AppUser customer = orderDTO.getCustomer() == null ? null : appUserRepository.findById(orderDTO.getCustomer())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found"));
-        order.setCustomer(customer);
+        order.setOrderNumber(UUID.randomUUID());
+//        final AppUser customer = orderDTO.getCustomer() == null ? null : appUserRepository.findById(orderDTO.getCustomer())
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found"));
+//       order.setCustomer(customer);
         return order;
     }
 

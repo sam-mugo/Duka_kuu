@@ -33,7 +33,7 @@ public class ProductDTO {
     @NotNull
     private Long subcategory;
 
-    @NotNull
-    private Long inventory;
+//    @NotNull
+//    private Long inventory;
 
 }

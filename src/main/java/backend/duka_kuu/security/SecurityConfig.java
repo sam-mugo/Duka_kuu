@@ -36,9 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**", "/swagger-ui/**").permitAll();
-        http.authorizeRequests().antMatchers(POST,"/api/category/", "/api/subcategory/", "/api/products").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(PUT, "/api/category/{id}", "/api/subcategory/{id}", "/api/products/{id}").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(DELETE, "/api/category/{id}", "/api/subcategory/{id}", "/api/products/{id}").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(POST,"/api/category/", "/api/subcategory/", "/api/product", "/api/order/").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(PUT, "/api/category/{id}", "/api/subcategory/{id}", "/api/products/{id}", "/api/order/{id}").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(DELETE, "/api/category/{id}", "/api/subcategory/{id}", "/api/products/{id}", "/api/order/{id}").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(GET, "/api/categories", "/api/subcategories/", "/api/products/").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/user/save/**").permitAll();

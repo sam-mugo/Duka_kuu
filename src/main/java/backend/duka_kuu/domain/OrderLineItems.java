@@ -26,7 +26,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class OrderLineItems {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(insertable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
@@ -48,13 +48,10 @@ public class OrderLineItems {
     @Column(nullable = false)
     private String quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "orderId", insertable = false, updatable = false)
     private Order order;
 
-//    @OneToOne
-//    @JoinColumn(name = "inventory_id", nullable = false)
-//    private Inventory inventory;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

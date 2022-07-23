@@ -35,15 +35,15 @@ public class Order {
     private Long orderId;
 
     @Column(nullable = false, unique = true)
-    private UUID orderNumber;
+    private String orderNumber;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderId")
     private List<OrderLineItems> orderItems;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "customer_id", nullable = false)
-//    private AppUser customer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    private AppUser user;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

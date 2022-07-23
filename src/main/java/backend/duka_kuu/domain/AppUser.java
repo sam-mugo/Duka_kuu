@@ -1,28 +1,12 @@
 package backend.duka_kuu.domain;
 
-//import java.time.OffsetDateTime;
+
 import java.util.ArrayList;
 import java.util.Collection;
-//import java.util.Set;
-//import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-//import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-//import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
+import java.util.List;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import static javax.persistence.FetchType.EAGER;
 
 
@@ -44,7 +28,7 @@ public class AppUser {
             strategy = GenerationType.SEQUENCE,
             generator = "primary_sequence"
     )
-    private Long id;
+    private Long userId;
 
     @Column(nullable = false)
     @NotNull
@@ -57,8 +41,9 @@ public class AppUser {
     @NotNull
     private String password;
 
-//    @OneToMany(mappedBy = "customer")
-//    private Set<Order> userOrders;
+    @OneToMany(mappedBy = "user")
+    @Column(nullable = true)
+    private Collection<Order> userOrders = new ArrayList<>();
 
     @ManyToMany(fetch = EAGER)
     private Collection<Role> roles = new ArrayList<>();

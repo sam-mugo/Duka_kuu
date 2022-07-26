@@ -2,9 +2,13 @@ package backend.duka_kuu.service;
 
 import backend.duka_kuu.domain.AppUser;
 import backend.duka_kuu.domain.Order;
+import backend.duka_kuu.domain.OrderLineItem;
 import backend.duka_kuu.model.OrderDTO;
 import backend.duka_kuu.repos.AppUserRepo;
 import backend.duka_kuu.repos.OrderRepository;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -30,7 +34,7 @@ public class OrderService {
         return orderRepository.findAll(Sort.by("orderId"))
                 .stream()
                 .map(order -> mapToDTO(order, new OrderDTO()))
-                .collect(Collectors.toList());
+                 .collect(Collectors.toList());
     }
 
     public OrderDTO get(final Long orderId) {
@@ -58,16 +62,22 @@ public class OrderService {
 
     private OrderDTO mapToDTO(final Order order, final OrderDTO orderDTO) {
         orderDTO.setOrderId(order.getOrderId());
-        orderDTO.setOrderNumber(UUID.randomUUID());
-        //orderDTO.setCustomer(order.getCustomer() == null ? null : order.getCustomer().getId());
+        UUID uuid = UUID.randomUUID();
+        orderDTO.setOrderNumber(uuid.toString());
+        List<OrderLineItem> orderItems = new ArrayList<>();
+        orderDTO.setOrderItems(orderItems);
+        orderDTO.setUser(order.getUser() == null ? null : order.getUser().getUserId());
         return orderDTO;
     }
 
     private Order mapToEntity(final OrderDTO orderDTO, final Order order) {
-        order.setOrderNumber(UUID.randomUUID());
-//        final AppUser customer = orderDTO.getCustomer() == null ? null : appUserRepository.findById(orderDTO.getCustomer())
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "customer not found"));
-//       order.setCustomer(customer);
+        UUID uuid = UUID.randomUUID();
+        order.setOrderNumber(uuid.toString());
+        final AppUser user = orderDTO.getUser() == null ? null : appUserRepository.findById(orderDTO.getUser())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
+       order.setUser(user);
+       List<OrderLineItem> orderItems = new ArrayList<>();
+       order.setOrderItems(orderItems);
         return order;
     }
 

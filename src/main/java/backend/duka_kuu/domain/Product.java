@@ -1,16 +1,8 @@
 package backend.duka_kuu.domain;
 
 import java.time.OffsetDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -60,6 +52,13 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategory_id", nullable = false)
     private Subcategory subcategory;
+
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "id", nullable = true)
+//    @OneToOne(mappedBy = "product")
+//    @PrimaryKeyJoinColumn
+//    private OrderLineItem orderItems;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "inventory_id", nullable = false)

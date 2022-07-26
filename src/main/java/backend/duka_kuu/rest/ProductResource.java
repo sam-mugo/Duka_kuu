@@ -33,7 +33,7 @@ public class ProductResource {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public ResponseEntity<ProductDTO> getProduct(@PathVariable final Long id) {
         return ResponseEntity.ok(productService.get(id));
     }
@@ -44,14 +44,14 @@ public class ProductResource {
         return new ResponseEntity<>(productService.create(productDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/product/{id}")
     public ResponseEntity<Void> updateProduct(@PathVariable final Long id,
             @RequestBody @Valid final ProductDTO productDTO) {
         productService.update(id, productDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/product/{id}")
     @ApiResponse(responseCode = "204")
     public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
         productService.delete(id);

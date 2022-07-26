@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/api/orders", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderResource {
 
     private final OrderService orderService;
@@ -28,30 +28,30 @@ public class OrderResource {
         this.orderService = orderService;
     }
 
-    @GetMapping
+    @GetMapping("/orders")
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity.ok(orderService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/order/{id}")
     public ResponseEntity<OrderDTO> getOrder(@PathVariable final Long id) {
         return ResponseEntity.ok(orderService.get(id));
     }
 
-    @PostMapping
+    @PostMapping("/order")
     @ApiResponse(responseCode = "201")
     public ResponseEntity<Long> createOrder(@RequestBody @Valid final OrderDTO orderDTO) {
-        return new ResponseEntity<>(orderService.create(orderDTO), HttpStatus.CREATED);
+        return  new ResponseEntity<>(orderService.create(orderDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("order/{id}")
     public ResponseEntity<Void> updateOrder(@PathVariable final Long id,
             @RequestBody @Valid final OrderDTO orderDTO) {
         orderService.update(id, orderDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("order/{id}")
     @ApiResponse(responseCode = "204")
     public ResponseEntity<Void> deleteOrder(@PathVariable final Long id) {
         orderService.delete(id);

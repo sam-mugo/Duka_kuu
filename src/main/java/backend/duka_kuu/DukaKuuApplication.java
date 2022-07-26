@@ -30,11 +30,9 @@ public class DukaKuuApplication {
             userService.saveRole(new Role(null, "ROLE_ADMIN"));
             userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-
 //            userService.saveUser(new AppUser(null, "mugo", "1234", new ArrayList<>()));
 //            userService.saveUser(new AppUser(null, "sam", "1234", new ArrayList<>()));
-            userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
-
+            userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>(), new ArrayList<>()));
 
 //            userService.addRoleToUser("mugo", "ROLE_USER");
 //            userService.addRoleToUser("sam", "ROLE_ADMIN");

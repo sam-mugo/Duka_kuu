@@ -65,6 +65,7 @@ public class SubcategoryService {
         return subcategoryDTO;
     }
 
+
     private Subcategory mapToEntity(final SubcategoryDTO subcategoryDTO,
             final Subcategory subcategory) {
         subcategory.setSubcategoryName(subcategoryDTO.getSubcategoryName());

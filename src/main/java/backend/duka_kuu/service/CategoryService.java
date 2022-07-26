@@ -64,5 +64,4 @@ public class CategoryService {
         category.setCategoryImage(categoryDTO.getCategoryImage());
         return category;
     }
-
 }

@@ -2,6 +2,8 @@ package backend.duka_kuu.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import backend.duka_kuu.domain.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +34,9 @@ public class ProductDTO {
 
     @NotNull
     private Long subcategory;
+
+
+    //private Long orderLineItems;
 
 //    @NotNull
 //    private Long inventory;

@@ -1,11 +1,12 @@
 package backend.duka_kuu.model;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import backend.duka_kuu.domain.OrderLineItem;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.util.List;
 
 
 @Getter
@@ -15,10 +16,12 @@ public class OrderDTO {
     private Long orderId;
 
     @NotNull
-    @Size(max = 255)
-    private UUID orderNumber;
+    private String orderNumber;
 
     @NotNull
-    private Long customer;
+    private List<OrderLineItem> orderItems;
+
+    @NotNull
+    private Long user;
 
 }

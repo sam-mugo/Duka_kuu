@@ -2,10 +2,9 @@ package backend.duka_kuu.domain;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,10 +38,11 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderId")
-    private List<OrderLineItems> orderItems;
+    private List<OrderLineItem> orderItems;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId")
+    @JsonBackReference
     private AppUser user;
 
     @CreatedDate

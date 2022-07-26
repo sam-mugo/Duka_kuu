@@ -2,6 +2,8 @@ package backend.duka_kuu.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import backend.duka_kuu.domain.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,22 +14,18 @@ public class OrderLineItemsDTO {
 
     private Long id;
 
-    @NotNull
-    @Size(max = 255)
-    private String skuCode;
+
+    private Long product;
+
 
     @NotNull
     @Size(max = 255)
-    private String price;
-
-    @NotNull
-    @Size(max = 255)
-    private String quantity;
+    private Integer quantity;
 
 //    @NotNull
 //    private Long inventory;
 
-    @NotNull
-    private Long order;
+//    @NotNull
+//    private Long order;
 
 }

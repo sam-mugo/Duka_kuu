@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import static javax.persistence.FetchType.EAGER;
 
@@ -43,6 +45,7 @@ public class AppUser {
 
     @OneToMany(mappedBy = "user")
     @Column(nullable = true)
+    @JsonManagedReference
     private Collection<Order> userOrders = new ArrayList<>();
 
     @ManyToMany(fetch = EAGER)
